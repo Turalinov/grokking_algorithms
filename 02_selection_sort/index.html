@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    "use strict";
+
+    //СОРТИРОВКА МАССИВА ПО ВОЗРАСТАНИЮ
+
+    // Находит индекс элемента с наименьшим значением в массиве.
+    // Принимает исходный массив array
+    // Возвращает индекс элемента с наименьшим значением
+
+    function findSmallestIndex(array) {
+      let smallestElement = array[0]; //Сохраняем наименьшее значение 
+      let smallestIndex = 0; // Сохраняет индекс наименьшего значения
+
+      for (let i = 1; i < array.length; i++) {
+        if (array[i] < smallestElement) {
+          smallestElement = array[i];
+          smallestIndex = i;
+        }
+      }
+
+      return smallestIndex;
+    }
+
+
+    // Сортировка массива по возрастанию на основе вышеприведенной функции (сортировка выбором)
+    // Принимает исходный массив array
+    // Возвращает новый отсортированный массив
+
+    function selectionSort(array) {
+      let sortedArray = [];
+      let copyArray = array.slice(); //метод slice() возвращает новый массив, содержащий копию части исходного массива («одноуровневую» копию)
+      let length = array.length;
+
+      for (let i = 0; i < length; i++) {
+        let smallestIndex = findSmallestIndex(copyArray);//Находим наименьший элемент массива
+        sortedArray.push(copyArray.splice(smallestIndex, 1)[0]); // Добавляем наименьший элемент в новый массив
+        //Метод splice() изменяет содержимое массива, удаляя существующие элементы и/или добавляя новые.
+      }
+
+      return sortedArray;
+    }
+
+
+    const sourceArray = [5, 3, 6, 2, 10];
+    const sortedArray = selectionSort(sourceArray);
+
+    console.log("Source array - ", sourceArray); // [5, 3, 6, 2, 10]
+    console.log("New sorted array - ", sortedArray); // [2, 3, 5, 6, 10]  
+
+  </script>
+
+</body>
+
+</html>
